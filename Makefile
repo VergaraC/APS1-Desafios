@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -pedantic -std=c99 -Og -g
-LFLAGS=-lm
+LFLAGS=-lm -lsystemd
 OBJCMD=$(CC) $(CFLAGS) $< -c
 EXECMD=$(CC) $^ -o $@ $(LFLAGS)
 OBJS=geometry.o drawing.o unit_test.o integration_test.o
