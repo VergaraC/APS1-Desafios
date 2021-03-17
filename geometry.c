@@ -19,9 +19,14 @@ int verify(point p, point a, point b) {
     }else{
         p2.x = a.x;
     }
+    point projecao;
+    projecao.x = p.x;
+    projecao.y = m*projecao.x + n;
    
-    if(((p2.y < a.y && p2.y > b.y) || (p2.y < b.y && p2.y > a.y)) && ((p2.x < a.x && p2.x > b.x) || (p2.x < b.x && p2.x > a.x))){
-    //if((p2.y < a.y && p2.y > b.y) || (p2.y < b.y && p2.y > a.y)){
+    if((projecao.y < p.y) && ((p2.y <= a.y && p2.y >= b.y) || (p2.y <= b.y && p2.y >= a.y)) && ((p2.x <= a.x && p2.x >= b.x) || (p2.x <= b.x && p2.x >= a.x)) && ((p.x < a.x)|| (p.x < b.x))){
+        if ((p2.y == a.y && p2.x == a.x) || (p2.y == b.y && p2.x == b.x)){
+            return 2;
+        }
         return 1;
     }
     return 0;
