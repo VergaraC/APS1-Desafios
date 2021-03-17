@@ -25,10 +25,11 @@ int verify(point p, point a, point b) {
    //(projecao.y < p.y) && 
    if ((p2.x == p.x) && !(p.y< a.y && p.y < b.y )){
        return 2;
-   }else if(((p2.y <= a.y && p2.y >= b.y) || (p2.y <= b.y && p2.y >= a.y)) && ((p2.x <= a.x && p2.x >= b.x) || (p2.x <= b.x && p2.x >= a.x)) && ((p.x < a.x)|| (p.x < b.x))){
-        if ((p2.y == a.y && p2.x == a.x) || (p2.y == b.y && p2.x == b.x) &&((p2.y<a.y) || (p2.y< b.y))){
+   }else if ((p2.y == a.y && p2.x == a.x) || ((p2.y == b.y) && (p2.x == b.x)) &&((p2.y<a.y) || (p2.y< b.y))){
             return 0;
-        }
+        
+   }else if(((p2.y <= a.y && p2.y >= b.y) || (p2.y <= b.y && p2.y >= a.y)) && ((p2.x <= a.x && p2.x >= b.x) || (p2.x <= b.x && p2.x >= a.x)) && ((p.x < a.x)|| (p.x < b.x))){
+        
         return 1;
     }
     return 0;
