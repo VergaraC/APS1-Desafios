@@ -25,7 +25,8 @@ int verify(point p, point a, point b) {
     projecao.x = p.x;
     projecao.y = m*projecao.x + n;
    //(projecao.y < p.y) && 
-    if ((p2.x == p.x) && ((p.y<= a.y && p.y >= b.y) || (p.y >= a.y && p.y <= b.y))){
+   //!(p.y<= b.y && p.y <= a.y)
+    if ((p2.x == p.x) && ((p.y <= a.y && p.y >= b.y) || (p.y >= a.y && p.y <= b.y))){
         return 2;
     }else if ((p2.y == a.y && p2.x == a.x) || ((p2.y == b.y) && (p2.x == b.x)) &&((p2.y<a.y) || (p2.y< b.y))){
         return 0;
