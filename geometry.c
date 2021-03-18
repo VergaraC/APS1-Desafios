@@ -10,7 +10,7 @@ int verify(point p, point a, point b) {
     //eq de reta: mx + n
     int m = 0;
     int c = a.x-b.x;
-    if (c > condicao_especial){
+    if ((c > condicao_especial) || (c< -condicao_especial)){
         m = (a.y-b.y)/(c); //tg da linha
     }
     int n = a.y-m*a.x; //constante da eq
@@ -28,13 +28,11 @@ int verify(point p, point a, point b) {
    //!(p.y<= b.y && p.y <= a.y)
     if ((p2.x == p.x) && ((p.y <= a.y && p.y >= b.y) || (p.y >= a.y && p.y <= b.y))){
         return 2;
-    }else if ((p2.y == a.y && p2.x == a.x) || ((p2.y == b.y) && (p2.x == b.x)) &&((p2.y<a.y) || (p2.y< b.y))){
+    }else if ((p2.y == a.y && p2.x == a.x) || (((p2.y == b.y) && (p2.x == b.x)) &&((p2.y<a.y) || (p2.y< b.y)))){
         return 0;
-    }else if(((p2.y <= a.y && p2.y >= b.y) || (p2.y <= b.y && p2.y >= a.y)) && ((p2.x <= a.x && p2.x >= b.x) || (p2.x <= b.x && p2.x >= a.x)) && ((p.x < a.x)|| (p.x < b.x))){
+    }else if(((p2.y <= a.y && p2.y >= b.y) || (p2.y <= b.y && p2.y >= a.y)) && (((p2.x <= a.x && p2.x >= b.x) || (p2.x <= b.x && p2.x >= a.x)) && ((p.x < a.x)|| (p.x < b.x)))){
         return 1;
-    } //else if(((p.x <= a.x && p.x <= b.x) && (p.y >= a.y && p.y <= b.y)) || ((p.x <= b.x && p.x <= a.x) && (p.y >= b.y && p.y <= a.y))){
-        //return 1;
-    //}
+    } 
     return 0;
 }
 
