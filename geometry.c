@@ -49,13 +49,13 @@ int verify(point p, point a, point b) {
     printf(" Projecao: %d, %d \n", projecao.x, projecao.y);
    
    printf("p2: %d, %d   P:  %d, %d   A: %d, %d  B: %d, %d \n" , p2.x,p2.y,p.x,p.y, a.x, a.y, b.x, b.y);
-    f ((p2.x == p.x) && ((p.y <= a.y && p.y >= b.y) || (p.y >= a.y && p.y <= b.y))){
+    /*f ((p2.x == p.x) && ((p.y <= a.y && p.y >= b.y) || (p.y >= a.y && p.y <= b.y))){
         return 2;
     }else if ((p2.y == a.y && p2.x == a.x) || (((p2.y == b.y) && (p2.x == b.x)) &&((p2.y<a.y) || (p2.y< b.y)))){
         return 0;
     }else if(((p2.y <= a.y && p2.y >= b.y) || (p2.y <= b.y && p2.y >= a.y)) && (((p2.x <= a.x && p2.x >= b.x) || (p2.x <= b.x && p2.x >= a.x)) && ((p.x < a.x)|| (p.x < b.x)))){
         return 1;
-    } /*
+    } */
     if ((((p2.y == bigY) && (p2.x == xBigY) && ((p.y <= a.y && p.y >= b.y) || (p.y >= a.y && p.y <= b.y)))||((p.x == a.x && p.y == a.y)||(p.x == b.x && p.y == b.y))) || ((projecao.y == p.y && (projecao.y < bigY && projecao.y > smallY)&& (projecao.x < bigX && projecao.x > smallX))) && (p.y <= bigY && p.y >= smallY)){
             return 2;
     }else if (((p2.y == smallY) && (p2.x == xSmallY))||((p2.y == bigY) && (p2.x == xBigY))){
@@ -66,7 +66,7 @@ int verify(point p, point a, point b) {
         }
         
         return 0;
-    } */
+    } 
     return 0;
 }
 
