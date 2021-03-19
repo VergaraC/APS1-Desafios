@@ -63,99 +63,99 @@ int verify(point p, point a, point b) {
 int inside(point p, point poly[], int n) {
 
     //caso dos quatro lados
-    if(n == 4){
-        point ponto1 = poly[0];
-        point ponto2 = poly[1];
-        point ponto3 = poly[2];
-        point ponto4 = poly[3];
-        int x_min = 100000000;
-        int x_max = 0;
-        int y_min = 100000000;
-        int y_max = 0;
-        for (int j=0; j<n; j++){
-            if(poly[j].x > x_max){
-                x_max = poly[j].x;
-            } else if(poly[j].y > y_max){
-                y_max = poly[j].y;
-            }
-            if(poly[j].x < x_min){
-                x_min = poly[j].x;
-            } else if(poly[j].y < y_min){
-                y_min = poly[j].y;
-            }
-        }
-        //checando de eh quadrado
-        if((ponto1.x == x_min && ponto1.y == y_min) && (ponto2.x == x_min && ponto2.y == y_max) && (ponto3.x == x_max && ponto3.y == y_max) && (ponto4.x == x_max && ponto4.y == y_min)){
-            if((p.x <= x_max && p.x >= x_min) && (p.y >= y_min && p.y <= y_max)){
-                return 1;
-            } else if((p.x < x_min && p.y < y_min) || (p.x > x_max && p.y > y_max) || (p.x > x_max && p.y < y_min) || (p.x < x_min && p.y > y_max) ||(p.x == x_min && p.y < y_min)||(p.x == x_max && p.y < y_min)||(p.x == x_min && p.y > y_max)||(p.x == x_max && p.y > y_max)||(p.y == y_max && p.x < x_min)||(p.y == y_min && p.x < x_min)||(p.y == y_max && p.x > x_max)||(p.y == y_min && p.x > x_max)||(p.x < x_max && p.x > x_min && p.y < y_min)){
-                return 0;
-            }
-        } else{
-            if(p.x < x_min && p.y < y_min ||
-             (p.x == ponto4.x && p.y > y_max) ||
-             (p.x == ponto1.x && p.x == x_min && p.y == ponto4.y && p.y == y_max) ||
-             (p.y == ponto4.y && p.y == y_max && p.x < x_min) ||
-             (p.x == ponto1.x && p.x == x_min && p.y == ponto2.y && p.x < ponto2.x) ||
-             (p.y == ponto2.y && p.y == y_min && p.x < x_min && p.x < ponto1.x && p.x < ponto2.x)){
-                return 0;
-            } else if((p.x == ponto3.x && p.y == ponto3.y) || (p.x == ponto4.x && p.y == ponto4.y) || (p.x > x_min && p.x < x_max && p.y > y_min && p.x < y_max)){
-                return 1;
-            }
-            // printf("%d\n", ponto3.x);
-            // printf("%d\n", ponto3.y);
-            // printf("losango\n");
-        }
-    } else if(n == 3){
-        point ponto1 = poly[0];
-        point ponto2 = poly[1];
-        point ponto3 = poly[2];
-        int x_min = 100000000;
-        int x_max = 0;
-        int y_min = 100000000;
-        int y_max = 0;
-        for (int j=0; j<n; j++){
-            if(poly[j].x > x_max){
-                x_max = poly[j].x;
-            } else if(poly[j].y > y_max){
-                y_max = poly[j].y;
-            }
-            if(poly[j].x < x_min){
-                x_min = poly[j].x;
-            } else if(poly[j].y < y_min){
-                y_min = poly[j].y;
-            }
-        }
-        if(
-            ((p.y > ponto1.y && p.y < ponto2.y && p.x > ponto1.x && p.x < ponto3.x) ||
-            (p.x == ponto1.x && p.y == ponto1.y) ||
-            (p.x == ponto2.x && p.y == ponto2.y) ||
-            (p.x == ponto3.x && p.y == ponto3.y))&&
-            !(p.x == ponto1.x && p.y == ponto2.y && p.x == x_min && p.y == y_min)
-        ){
-            return 1;
-        }else if( 
-                (p.x < x_min && p.y < y_min) ||
-                (p.x > x_max && p.y > y_max) ||
-                (p.x > x_max && p.y < y_min) ||
-                (p.x < x_min && p.y > y_max) ||
-                (p.x == x_min && p.y < y_min)||
-                (p.x == x_max && p.y < y_min)||
-                (p.x == x_min && p.y > y_max)||
-                (p.x == x_max && p.y > y_max)||
-                (p.y == y_max && p.x < x_min)||
-                (p.y == y_min && p.x < x_min)||
-                (p.y == y_max && p.x > x_max)||
-                (p.y == y_min && p.x > x_max)||
-                (p.x < x_max && p.x > x_min && p.y < y_min) ||
-                (p.x > ponto2.x && p.y == ponto2.y) ||
-                (p.x > x_min && p.y > y_max && p.x < ponto3.x && p.y > ponto3.y) ||
-                (p.x < x_min && p.y == ponto1.y) ||
-                (p.x > x_min && p.x < x_max && p.y == y_max)
-            ){
-            return 0;
-        }
-    }
+    // if(n == 4){
+    //     point ponto1 = poly[0];
+    //     point ponto2 = poly[1];
+    //     point ponto3 = poly[2];
+    //     point ponto4 = poly[3];
+    //     int x_min = 100000000;
+    //     int x_max = 0;
+    //     int y_min = 100000000;
+    //     int y_max = 0;
+    //     for (int j=0; j<n; j++){
+    //         if(poly[j].x > x_max){
+    //             x_max = poly[j].x;
+    //         } else if(poly[j].y > y_max){
+    //             y_max = poly[j].y;
+    //         }
+    //         if(poly[j].x < x_min){
+    //             x_min = poly[j].x;
+    //         } else if(poly[j].y < y_min){
+    //             y_min = poly[j].y;
+    //         }
+    //     }
+    //     //checando de eh quadrado
+    //     if((ponto1.x == x_min && ponto1.y == y_min) && (ponto2.x == x_min && ponto2.y == y_max) && (ponto3.x == x_max && ponto3.y == y_max) && (ponto4.x == x_max && ponto4.y == y_min)){
+    //         if((p.x <= x_max && p.x >= x_min) && (p.y >= y_min && p.y <= y_max)){
+    //             return 1;
+    //         } else if((p.x < x_min && p.y < y_min) || (p.x > x_max && p.y > y_max) || (p.x > x_max && p.y < y_min) || (p.x < x_min && p.y > y_max) ||(p.x == x_min && p.y < y_min)||(p.x == x_max && p.y < y_min)||(p.x == x_min && p.y > y_max)||(p.x == x_max && p.y > y_max)||(p.y == y_max && p.x < x_min)||(p.y == y_min && p.x < x_min)||(p.y == y_max && p.x > x_max)||(p.y == y_min && p.x > x_max)||(p.x < x_max && p.x > x_min && p.y < y_min)){
+    //             return 0;
+    //         }
+    //     } else{
+    //         if(p.x < x_min && p.y < y_min ||
+    //          (p.x == ponto4.x && p.y > y_max) ||
+    //          (p.x == ponto1.x && p.x == x_min && p.y == ponto4.y && p.y == y_max) ||
+    //          (p.y == ponto4.y && p.y == y_max && p.x < x_min) ||
+    //          (p.x == ponto1.x && p.x == x_min && p.y == ponto2.y && p.x < ponto2.x) ||
+    //          (p.y == ponto2.y && p.y == y_min && p.x < x_min && p.x < ponto1.x && p.x < ponto2.x)){
+    //             return 0;
+    //         } else if((p.x == ponto3.x && p.y == ponto3.y) || (p.x == ponto4.x && p.y == ponto4.y) || (p.x > x_min && p.x < x_max && p.y > y_min && p.x < y_max)){
+    //             return 1;
+    //         }
+    //         // printf("%d\n", ponto3.x);
+    //         // printf("%d\n", ponto3.y);
+    //         // printf("losango\n");
+    //     }
+    // } else if(n == 3){
+    //     point ponto1 = poly[0];
+    //     point ponto2 = poly[1];
+    //     point ponto3 = poly[2];
+    //     int x_min = 100000000;
+    //     int x_max = 0;
+    //     int y_min = 100000000;
+    //     int y_max = 0;
+    //     for (int j=0; j<n; j++){
+    //         if(poly[j].x > x_max){
+    //             x_max = poly[j].x;
+    //         } else if(poly[j].y > y_max){
+    //             y_max = poly[j].y;
+    //         }
+    //         if(poly[j].x < x_min){
+    //             x_min = poly[j].x;
+    //         } else if(poly[j].y < y_min){
+    //             y_min = poly[j].y;
+    //         }
+    //     }
+    //     if(
+    //         ((p.y > ponto1.y && p.y < ponto2.y && p.x > ponto1.x && p.x < ponto3.x) ||
+    //         (p.x == ponto1.x && p.y == ponto1.y) ||
+    //         (p.x == ponto2.x && p.y == ponto2.y) ||
+    //         (p.x == ponto3.x && p.y == ponto3.y))&&
+    //         !(p.x == ponto1.x && p.y == ponto2.y && p.x == x_min && p.y == y_min)
+    //     ){
+    //         return 1;
+    //     }else if( 
+    //             (p.x < x_min && p.y < y_min) ||
+    //             (p.x > x_max && p.y > y_max) ||
+    //             (p.x > x_max && p.y < y_min) ||
+    //             (p.x < x_min && p.y > y_max) ||
+    //             (p.x == x_min && p.y < y_min)||
+    //             (p.x == x_max && p.y < y_min)||
+    //             (p.x == x_min && p.y > y_max)||
+    //             (p.x == x_max && p.y > y_max)||
+    //             (p.y == y_max && p.x < x_min)||
+    //             (p.y == y_min && p.x < x_min)||
+    //             (p.y == y_max && p.x > x_max)||
+    //             (p.y == y_min && p.x > x_max)||
+    //             (p.x < x_max && p.x > x_min && p.y < y_min) ||
+    //             (p.x > ponto2.x && p.y == ponto2.y) ||
+    //             (p.x > x_min && p.y > y_max && p.x < ponto3.x && p.y > ponto3.y) ||
+    //             (p.x < x_min && p.y == ponto1.y) ||
+    //             (p.x > x_min && p.x < x_max && p.y == y_max)
+    //         ){
+    //         return 0;
+    //     }
+    // }
 
     int atual, cont;
     for (int i = 0; i < n; i++){
