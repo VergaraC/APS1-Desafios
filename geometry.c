@@ -60,8 +60,10 @@ int verify(point p, point a, point b) {
     
     if ( (((p2.x == p.x) && (p.y <= big_y.y && p.y >= small_y.y)) && (!(p.y > small_y.y && p.y < big_y.y && p.x == small_x.x)))|| (p.x == small_x.x && p.x == small_x.y)){
         return 2; //(p2.x == big_y.x && p2.y == big_y.y )
-    }else if((p.y == a.y && p.y == b.y)){
+    }else if((p.y == a.y && p.y == b.y) || (((p.x == a.x && p.x && b.x) && (p2.x == a.x && p2.x && b.x)) && (p.y<= big_y.y && p.y>= small_y.y))){
         return 2;
+    }else if (((p2.x == big_y.x && p2.y == big_y.y) && (p2.x >= small_x.x && p2.x <=big_x.x)) && (p.x < big_x.x)){
+        return 1;
     }else if ( (p2.y == a.y && p2.x == a.x) || (((p2.y == b.y) && (p2.x == b.x) && (p2.y < big_y.y)) && ((p.y <= small_y.y)))){
         return 0;
     }else if( (p2.y <= big_y.y && p2.y >= small_y.y) && ( (p2.x <= big_x.x && p2.x >= small_x.x) && (p.x < big_x.x) ) && !(p.y == small_y.y && p.y < big_y.y)){
