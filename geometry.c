@@ -62,6 +62,42 @@ int verify(point p, point a, point b) {
 
 int inside(point p, point poly[], int n) {
 
+    if(n == 4){
+        point ponto1 = poly[0];
+        point ponto2 = poly[1];
+        point ponto3 = poly[2];
+        point ponto4 = poly[3];
+        int xMin = 100000000;
+        int xMax = 0;
+        int yMin = 100000000;
+        int yMax = 0;
+        for (int j=0; j<n; j++){
+            if(poly[j].x > xMax){
+                xMax = poly[j].x;
+            } else{
+                yMax = poly[j].y;
+            }
+            if(poly[j].x < xMin){
+                xMin = poly[j].x;
+            } else{
+                yMin = poly[j].y;
+            }
+        }
+        printf("xMin: %d, yMin: %d, xMax: %d, yMax: %d \n", xMin, yMin, xMax, yMax);
+        if((ponto1.x == xMin && ponto1.y == yMin) && (ponto2.x == xMin && ponto2.y == yMax) && (ponto3.x == xMax && ponto3.y == yMax) && (ponto4.x == xMax && ponto4.y == yMin)){
+            printf("quadrado \n");
+        }
+
+        if((p.x < xMax && p.x >= xMin) && (p.y >= yMin && p.y <= yMax)){
+            return 1;
+        }
+        
+    // } else if(n == 3){
+    //     point ponto1 = poly[0];
+    //     point ponto2 = poly[1];
+    //     point ponto3 = poly[2];
+    }
+
     int atual, cont;
     for (int i = 0; i < n; i++){
         atual = verify(p, poly[i], poly[i+1]);
