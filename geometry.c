@@ -6,11 +6,9 @@ double condicao_especial = 0.000001;
 
 int verify(point p, point a, point b) {
     
-    point p2, projecao, p_x_min, p_x_min2;
-
+    point p2, projecao, p_x_min,big_x, big_y, small_x, small_y;
     //eq de reta: mx + n
     int m;
-    int big_y,small_y, x_small_y,x_big_y, big_x, y_big_x, small_x, y_small_x;
     int c = a.x-b.x;
     
     if ((c > condicao_especial) || (c< -condicao_especial)){
@@ -19,29 +17,29 @@ int verify(point p, point a, point b) {
         m = 0;
     }
     if (a.y >= b.y){
-        big_y = a.y;
-        x_big_y = a.x;
-        small_y = b.y;
-        x_small_y = b.x;
+        big_y.y = a.y;
+        big_y.x = a.x;
+        small_y.y = b.y;
+        small_y.x = b.x;
     }else{
-        big_y = b.y;
-        x_big_y =b.x;
-        small_y = a.y;
-        x_small_y = a.x;
+        big_y.y = b.y;
+        big_y.x =b.x;
+        small_y.y = a.y;
+        small_y.x = a.x;
     }
     if (a.x >= b.x){
-        big_x = a.x;
-        y_big_x = a.y;
-        small_x = b.x;
-        y_small_x = b.y;
+        big_x.x = a.x;
+        big_x.y = a.y;
+        small_x.x = b.x;
+        small_x.y = b.y;
     }else{
-        big_x = b.x;
-        y_big_x = b.y;
-        small_x = a.x;
-        y_small_x = a.y;
+        big_x.x = b.x;
+        big_x.y = b.y;
+        small_x.x = a.x;
+        small_x.y = a.y;
 
     }
-    printf("Big_x : %d, x_big_y: %d, x_small_y: %d,   \n", big_x, x_big_y,x_small_y);
+    printf("Big_x.x : %d, big_y.x: %d, small_y.x: %d,   \n", big_x.x, big_y.x,small_y.x);
     int n = a.y-m*a.x; //constante da eq
     p2.y = p.y;
 
@@ -53,27 +51,23 @@ int verify(point p, point a, point b) {
     projecao.x = p.x;
     projecao.y = m*projecao.x + n;
 
-    p_x_min2.x = small_x;
-    p_x_min2.y = y_big_x;
-    p_x_min.x = small_x;
-    p_x_min.x = y_small_x; 
-
+    p_x_min.x = small_x.x;
+    p_x_min.y = big_x.y;
+   
 
     printf(" Projecao: %d, %d \n", projecao.x, projecao.y);
     printf("p2: %d, %d   P:  %d, %d   A: %d, %d  B: %d, %d \n" , p2.x,p2.y,p.x,p.y, a.x, a.y, b.x, b.y);
     
-    if ( (p2.x == p.x) && (p.y <= big_y && p.y >= small_y) && (!(p.y > small_y && p.y < big_y && p.x == small_x))|| (p.x == small_x && p.x == y_small_x)){
-        return 2; //(p2.x == x_big_y && p2.y == big_y )
+    if ( (((p2.x == p.x) && (p.y <= big_y.y && p.y >= small_y.y)) && (!(p.y > small_y.y && p.y < big_y.y && p.x == small_x.x)))|| (p.x == small_x.x && p.x == small_x.y)){
+        return 2; //(p2.x == big_y.x && p2.y == big_y.y )
     }else if((p.y == a.y && p.y == b.y)){
         return 2;
-    }else if ( (p2.y == a.y && p2.x == a.x) || ((p2.y == b.y) && (p2.x == b.x) && (p2.y < big_y)) && ((p.y <= small_y))){
+    }else if ( (p2.y == a.y && p2.x == a.x) || (((p2.y == b.y) && (p2.x == b.x) && (p2.y < big_y.y)) && ((p.y <= small_y.y)))){
         return 0;
-    
-    }else if( (p2.y <= big_y && p2.y >= small_y) && ( (p2.x <= big_x && p2.x >= small_x) && (p.x < big_x) ) && !(p.y == small_y && p.y < big_y)){
-        //if (m==0 ||verify(p, p_x_min, p_x_min2)==1){
+    }else if( (p2.y <= big_y.y && p2.y >= small_y.y) && ( (p2.x <= big_x.x && p2.x >= small_x.x) && (p.x < big_x.x) ) && !(p.y == small_y.y && p.y < big_y.y)){
+        //if (m==0 ||verify(p, small_x, p_x_min)==1){ -Recursiva para os de cruza
             return 1;
-       // }
-        
+       // } 
     } 
     return 0;
 }
