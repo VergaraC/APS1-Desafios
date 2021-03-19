@@ -5,12 +5,12 @@
 double condicao_especial = 0.000001;
 
 int verify(point p, point a, point b) {
-    point p2;
-    point projecao;
+    
+    point p2, projecao, pXmin, pXmin2;
 
     //eq de reta: mx + n
     int m;
-    int bigY,smallY, xSmallY,xBigY, bigX, smallX;
+    int bigY,smallY, xSmallY,xBigY, bigX, yBigX, smallX, ySmallx;
     int c = a.x-b.x;
     
     if ((c > condicao_especial) || (c< -condicao_especial)){
@@ -18,7 +18,6 @@ int verify(point p, point a, point b) {
     } else {
         m = 0;
     }
-
     if (a.y >= b.y){
         bigY = a.y;
         xBigY = a.x;
@@ -32,12 +31,17 @@ int verify(point p, point a, point b) {
     }
     if (a.x >= b.x){
         bigX = a.x;
+        yBigX = a.y;
         smallX = b.x;
+        ySmallx = b.y;
     }else{
         bigX = b.x;
+        yBigX = b.y;
         smallX = a.x;
-    }
+        ySmallx = a.y;
 
+    }
+    printf("BigX : %d, xBigY: %d, xSmallY: %d,   \n", bigX, xBigY,xSmallY);
     int n = a.y-m*a.x; //constante da eq
     p2.y = p.y;
 
@@ -46,20 +50,33 @@ int verify(point p, point a, point b) {
     }else{
         p2.x = a.x;
     }
-
     projecao.x = p.x;
     projecao.y = m*projecao.x + n;
 
-    if ( (p2.x == p.x) && (p.y <= bigY && p.y >= smallY) && (!(p.y > smallY && p.y < bigY && p.x == smallX))){
+    pXmin2.x = smallX;
+    pXmin2.y = yBigX;
+    pXmin.x = smallX;
+    pXmin.x = ySmallx; 
+
+
+    printf(" Projecao: %d, %d \n", projecao.x, projecao.y);
+    printf("p2: %d, %d   P:  %d, %d   A: %d, %d  B: %d, %d \n" , p2.x,p2.y,p.x,p.y, a.x, a.y, b.x, b.y);
+    
+    if ( (p2.x == p.x) && (p.y <= bigY && p.y >= smallY) && (!(p.y > smallY && p.y < bigY && p.x == smallX))|| (p.x == smallX && p.x == ySmallx)){
+        return 2; //(p2.x == xBigY && p2.y == bigY )
+    }else if((p.y == a.y && p.y == b.y)){
         return 2;
     }else if ( (p2.y == a.y && p2.x == a.x) || ((p2.y == b.y) && (p2.x == b.x) && (p2.y < bigY)) && ((p.y <= smallY))){
         return 0;
+    
     }else if( (p2.y <= bigY && p2.y >= smallY) && ( (p2.x <= bigX && p2.x >= smallX) && (p.x < bigX) ) && !(p.y == smallY && p.y < bigY)){
-        return 1;
+        //if (m==0 ||verify(p, pXmin, pXmin2)==1){
+            return 1;
+       // }
+        
     } 
     return 0;
 }
-
 int inside(point p, point poly[], int n) {
 
     if(n == 4){
