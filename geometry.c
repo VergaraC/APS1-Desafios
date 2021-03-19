@@ -69,7 +69,6 @@ int inside(point p, point poly[], int n) {
             cont += 1;
         }else if (atual ==2){
             cont += 2;
-
         }
     }
     if(cont%2!=0){
