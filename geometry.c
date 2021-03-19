@@ -61,5 +61,20 @@ int verify(point p, point a, point b) {
 }
 
 int inside(point p, point poly[], int n) {
+
+    int atual, cont;
+    for (int i = 0; i < n; i++){
+        atual = verify(p, poly[i], poly[i+1]);
+        if (atual){
+            cont += 1;
+        }else if (atual ==2){
+            cont += 2;
+
+        }
+    }
+    if(cont%2!=0){
+        return 1;
+    }
     return 0;
+
 }
