@@ -185,7 +185,7 @@ int preto(point p, point a, point b){
     } 
     return 0;
 }
-
+ 
 int verify(point p, point a, point b) {
     if(preto(p,a,b)){
         return 2;
