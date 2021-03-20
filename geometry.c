@@ -87,13 +87,13 @@ int azul(point p, point a, point b){
         return 0;
     }
 
-    double m, p2x;
-    int p2y;
+    double m, p2_x;
+    int p2_y;
 
-    if (a.x-b.x == 0){
+    if (a.x - b.x == 0){
         m = 0;
     } else {
-        m = (double)(a.y-b.y)/(a.x-b.x); //tg da linha
+        m = (double) (a.y - b.y) / (a.x - b.x); //tg da linha
     }
     
     if(m*(p.x - a.x) + a.y - p.y == 0){
@@ -102,13 +102,16 @@ int azul(point p, point a, point b){
         ponto_na_reta = 0;
     }
 
-    double n = a.y-m*a.x; //constante da eq
-    p2y = p.y;
+    double n = a.y - m*a.x; //constante da eq
+
+    p2_y = p.y;
+
     if (m != 0 ){
-        p2x = (double)(p.y - n)/m;
+        p2_x = (double) (p.y - n) / m;
     }else{
-        p2x = (double) a.x;
+        p2_x = (double) a.x;
     }
+
     if(a.x > b.x){
         point_x_max = a;
         point_x_min = b;
@@ -124,14 +127,17 @@ int azul(point p, point a, point b){
         point_y_max = b;
         point_y_min = a;
     }
-    if (p2x< p.x){
+
+    if (p2_x< p.x){
         return 0;
     }
-    if((p2y == point_y_min.y && p2x - point_y_min.x <= condicao_especial)){
+
+    if((p2_y == point_y_min.y && p2_x - point_y_min.x <= condicao_especial)){
         return 0;
-    }else if((p2y == point_y_max.y && p2x - point_y_max.x <= condicao_especial)|| ((p2x < point_x_max.x && p2x > point_x_min.x) && (p2y < point_y_max.y && p2y > point_y_min.y))){
+    }else if((p2_y == point_y_max.y && p2_x - point_y_max.x <= condicao_especial) || ((p2_x < point_x_max.x && p2_x > point_x_min.x) && (p2_y < point_y_max.y && p2_y > point_y_min.y))){
         return 1;
     }
+    
     if(vertical(a,b)){
         if(dentro_linha(p,a,b)){
             return 1;
@@ -142,10 +148,7 @@ int azul(point p, point a, point b){
             return 1;
         }
         return 0;
-    
     }
-    
-    
     return 0;
 }
 
@@ -165,9 +168,11 @@ int preto(point p, point a, point b){
     } else{
         ponto_na_reta = 0;
     }
+
     if(!(dentro_linha(p,a,b))){
         return 0;
     }
+
     if(vertical(a,b)){
         if(p.x == a.x && (dentro_linha(p,a,b))){
             return 1;
@@ -180,6 +185,7 @@ int preto(point p, point a, point b){
         }
         return 0;
     }
+
     if((p.x == a.x && p.y == a.y) ||(p.x == b.x && p.y == b.y) || (ponto_na_reta && ((p.x >= x_min && p.x <= x_max) || (p.y >= y_min && p.y <= y_max)))){
         return 1;
     } 
@@ -196,22 +202,25 @@ int verify(point p, point a, point b) {
 }
 
 int inside(point p, point poly[], int n) {
-    int atual, cont;
+    int cont = 0;
+    int atual;
     for (int i = 0; i < n; i++){
         if(i == n-1){
             atual = verify(p, poly[i], poly[0]);
         } else{
             atual = verify(p, poly[i], poly[i+1]);
-            if (atual){
-                cont += 1;
-            }else if (atual ==2){
-                cont += 2;
-            }
+        }
+        
+        if (atual){
+            cont += 1;
+        }else if (atual == 2){
+            return 1;
         }
     }
-    if(cont%2!=0){
+
+    if(cont%2 != 0){
         return 1;
     }
-    return 0;
 
+    return 0;
 }
