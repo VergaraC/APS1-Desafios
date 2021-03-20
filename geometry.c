@@ -174,9 +174,8 @@ int preto(point p, point a, point b){
         }
         return 0;
     } else if(horizontal(a,b)){
-        //if((p.y == a.y) && (dentro_linha(p,a,b))){
-        if((p.y == a.y && p.y == b.y) && (!(p.x > a.x && p.x > b.x))){
 
+        if(((p.y == a.y && p.y == b.y) && !(p.x < a.x && p.x < b.x))){
             return 1;
         }
         return 0;
